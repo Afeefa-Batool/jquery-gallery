@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <style>
+     #a1{
+         width: 520px;
+         height: 500px;
+     }
+     .imgStyle{
+         width: 100px;
+         height: 100px;
+         border: 3px solid grey;
+     }
+     #imgeffect, #imageduration{
+         width: 515px;
+     }
+ </style> 
+</head>
+  <body>
+    <div class="container">
+        <h1 class="display-3">Jquery Image Gallery</h1>
+        <hr>
+        <img id="a1" src="pics/pic1.jpg" class="img-responsive img-fluid">
+        <br><hr>
+        <div id="divId">
+            <img src="pics/pic1.jpg" class="imgStyle">
+            <img src="pics/pic2.jpg" class="imgStyle">
+            <img src="pics/pic3.jpg" class="imgStyle">
+            <img src="pics/pic4.jpg" class="imgStyle">
+            <img src="pics/pic5.jfif" class="imgStyle">
+        </div>
+        <hr>
+        <p class="lead">Select Gallery Effect</p>
+        <select class="form-control" id="imgeffect">
+            <option value="fade">Fade Animation</option>
+            <option value="slide">Slider Animation</option>
+            <option value="hide">Hide & Show Animation</option>
+          </select>
+          <br>
+          <p class="lead">Select Animation Timing</p>
+          <select class="form-control" id="imageduration">
+           <option value="1">1</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+           <option value="4">4</option>
+           <option value="5">5</option>
+          </select>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script>
+     $(document).ready(function(){
+        $("#divId img").on({
+            mouseover: function(){
+                $(this).css({
+                    'border': '3px solid blue',
+                    'cursor':'pointer'
+                })
+            },
+            mouseout: function(){
+                $(this).css({
+                    'border': '3px solid grey',
+                    'cursor':'default'
+                })
+            },
+            click: function(){
+                var imgUrl = $(this).attr('src');
+
+                    //getting the drop down
+                    var effect = $("#imgeffect").val();
+
+                    //getting the timing dropdown
+                    var duration = $("#imageduration").val() * 1000;
+
+                    if(effect == "slide"){
+                        $("#a1").slideUp(duration, function(){
+                            $(this).attr('src', imgUrl).slideDown(duration);
+                        })
+                    }else if(effect == "hide"){
+                        $("#a1").hide(duration, function(){
+                            $(this).attr('src', imgUrl).show(duration);
+                        })
+                    }
+                    else{
+                        $("#a1").fadeOut(duration, function(){
+                            $(this).attr('src', imgUrl).fadeIn(duration);
+                        })
+                    }
+            }
+        })
+     })
+ </script>  
+</body>
+</html>
